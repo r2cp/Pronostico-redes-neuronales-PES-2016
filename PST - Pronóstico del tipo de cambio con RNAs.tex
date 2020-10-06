@@ -1,0 +1,366 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Presentación Beamer
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Plantilla para presentaciones de laboratorio de Comunicaciones 4
+% Universidad de San Carlos de Guatemala
+% Autor: Rodrigo Chang
+%
+% Licencia:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PAQUETES Y TEMAS
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+	
+\usetheme{Madrid}
+\usecolortheme{beaver}
+%\usecolortheme{dolphin}
+%\usecolortheme{orchid}
+%\usecolortheme{wolverine}
+
+% Configuracion de las diapositivas
+
+% To remove the footer line in all slides uncomment this line
+\setbeamertemplate{footline} 
+% To replace the footer line in all slides with a simple slide count uncomment this line
+%\setbeamertemplate{footline}[page number]
+% To remove the navigation symbols from the bottom of all slides uncomment this line 
+%\setbeamertemplate{navigation symbols}{}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{pdfpages} % Para incluir paginas de otros PDFs
+\usepackage{comment}
+\usepackage{caption}
+
+% Referencias
+\usepackage[backend=biber, bibstyle=authoryear, citestyle=authoryear]{biblatex}
+\addbibresource{referencias.bib}
+
+%----------------------------------------------------------------------------------------
+%	CONFIGURACION DE LISTINGS
+%----------------------------------------------------------------------------------------
+% Definiciones para el estilo de python
+\input{listings/R_style}
+\lstset{style=customR, frame=none}
+
+%\begin{frame}[fragile]{Configuración con registros}
+%	\begin{lstlisting}
+%	
+%	\end{lstlisting}
+%\end{frame}
+
+
+%----------------------------------------------------------------------------------------
+%	CONFIGURACION DE SLIDES DE AYUDA
+%----------------------------------------------------------------------------------------
+\newcommand{\incluirpdf}[3]{
+	\setbeamercolor{background canvas}{bg=}
+	\includepdf[pages=#2-#3]{#1}}
+
+\newcommand{\figura}[2]{
+	\begin{figure}
+		\centering
+		\includegraphics[width=#1\textwidth]{#2}
+	\end{figure}	
+}
+
+\newcommand{\diapositivatexto}[2]{
+\begin{frame}{#1}
+	\huge\centerline{#2}
+\end{frame}
+}
+%----------------------------------------------------------------------------------------
+%	PÁGINA DEL TITULO
+%----------------------------------------------------------------------------------------
+
+ % El titulo corto aparece al final de cada diapositiva, 
+ % el titulo completo sólo en la página del titulo
+%\title[Laboratorio de Comunicaciones 4]{Módulo ADC y muestreo}
+\title[Laboratorio de microcontroladores]{Modelo de pronóstico del tipo de cambio para Guatemala utilizando redes neuronales artificiales}
+
+% Nombre del autor
+\author{Rodrigo Chang}
+% Institución al fondo de cada diapositiva, abreviación
+\institute[USAC]
+{
+% Nombre de la institución para la página del titulo
+Banco de Guatemala \\ 
+\medskip
+% Dirección de correo electrónico
+\textit{Programa de Estudios Superiores} % Dirección de correo electrónico
+}
+\date{julio de 2016} % Fecha, que puede ser cambiada a una fecha específica
+
+%-------------------------------------------------------
+%	INICIO DEL DOCUMENTO
+%-------------------------------------------------------
+
+\newcommand{\anchoGraficas}{0.9}
+
+\begin{document}
+
+\begin{frame}
+% Imprime la diapositiva del titulo como primera página
+\titlepage 
+\end{frame}
+
+\begin{comment}
+% Para hacer una diapositiva como índice
+\begin{frame}
+% Table of contents slide, comment this block out to remove it
+\frametitle{Lo que veremos hoy...} 
+\tableofcontents
+\end{frame}
+\end{comment}
+
+%--------------------------------------------------------
+%	MARCO TEÓRICO
+%--------------------------------------------------------
+\section{Marco teórico}
+
+\subsection{El tipo de cambio}
+
+\begin{frame}{El tipo de cambio}
+	\begin{itemize}
+		\item El precio de la moneda de un país en función de la moneda de otro.
+		\item Fuerte impacto sobre la cuenta corriente y otras variables macroeconómicas.
+		\item Permite comparar los precios de bienes y servicios.
+	\end{itemize}
+\end{frame}
+
+\begin{comment}
+\begin{frame}{El mercado de divisas}
+	Tres sectores de comercio:
+	\begin{itemize}
+		\item El comercio interbancario, que conforma entre un 60\% a 80\% del mercado \parencite{exchecon}.
+		
+		\item El comercio manejado a través de corredores de instituciones financieras no bancarias, que conforma de un 15\% a un 35\%.
+		
+		\item Y el comercio manejado por clientes privados y empresas multinacionales, que conforma alrededor del 5\%.
+	\end{itemize}
+	
+	Además: 
+	
+	\begin{itemize}
+		\item Intervención de bancos centrales en el mercado 
+		%: participantes del mercado observan los movimientos de los bancos centrales para obtener información sobre la futura política macroeconómica.
+	\end{itemize}
+\end{frame}
+\end{comment}
+
+\subsection{El modelo monetario}
+\begin{frame}{El modelo monetario de precios rígidos}
+	De acuerdo con \textcite{boughton1988monetary}, el enfoque monetario comprende las siguientes cinco hipótesis: 
+	\begin{enumerate}
+		\item La PPP se cumple sobre un horizonte de tiempo relevante.
+		\item Se mantiene la paridad de interés descubierta en todo momento.
+		\item La demanda de saldos reales de dinero es una función estable de un conjunto reducido de variables.
+		\item La oferta de dinero se determina por un proceso estable.
+		\item Las expectativas son en algún sentido racionales.
+	\end{enumerate}
+	
+	\begin{equation}
+	s = (m - m^*) - \phi (y-y^*) + \lambda (\pi - \pi^*) - (1/\theta)[(i-\pi) - (i^* - \pi^*)]
+	\label{spma}
+	\end{equation}
+\end{frame}
+
+\subsection{Crítica de Meese y Roggoff}
+
+\begin{frame}{Crítica de \textcite{meese1983empirical}}
+	\begin{itemize}
+		\item Fundamentos macroeconómicos vs. caminata aleatoria.
+		
+		\item Implicaciones prácticas: permite a inversores, bancos centrales e instituciones financieras decidir la asignación de activos, manejar el riesgo y formular políticas.
+		
+		\item Implicaciones teóricas: la significancia teórica del pronóstico del tipo de cambio tiene implicaciones vitales en la hipótesis de mercados eficientes, así como el desarrollo de modelos teóricos en finanzas internacionales.
+	\end{itemize}
+\end{frame}
+
+%--------------------------------------------------------
+%	METODOLOGÍA
+%--------------------------------------------------------
+\section{Metodología}
+
+\begin{frame}{Metodología}{Objetivo}
+	Se utilizan 3 modelos distintos para comparar sus resultados de pronóstico:
+	\begin{itemize}
+		\item Modelo de caminata aleatoria
+		\item Modelo lineal
+		\item Modelo con redes neuronales artificiales
+	\end{itemize}
+\end{frame}
+
+\subsection{Caminata aleatoria}
+
+\begin{frame}{Metodología}{Caminata aleatoria}
+	Siguiendo la metodología de \textcite{meese1983empirical}, se propone un modelo de caminata aleatoria de la forma: 
+	
+	\begin{equation}
+	s_t = s_{t-1} + \epsilon_t
+	\end{equation}
+	
+	donde:
+	\begin{itemize}
+		\item $\epsilon_t \sim \mathrm{Normal}(0, \sigma_e^2)$, donde $\sigma_e^2$ es la varianza de las observaciones dentro de la muestra
+	\end{itemize}
+\end{frame}
+
+\subsection{Modelo lineal}
+
+\begin{frame}{Metodología}{Modelo lineal}
+	La especificación exacta del modelo lineal utilizado es la siguiente:
+	
+	\begin{equation}
+	s_t = \beta_0 + \beta_1 X_{1t} + \beta_2 X_{2t} + \beta_3 X_{3t} + \beta_4 X_{4t} + \epsilon_t
+	\label{linearModel}
+	\end{equation}
+	
+	donde:
+	
+	\begin{itemize}
+		\item $X_1$ es el logaritmo natural de la oferta relativa de dinero (como índices): $ \ln \big ( \frac{M2_{GT}}{M2_{US}} \big) $
+		
+		\item $X_2$ es el logaritmo natural del PIB relativo (como índices): $ \ln \big ( \frac{PIB_{GT}}{PIB_{US}} \big) $
+		
+		\item $X_3$ es el diferencial de tasas de interés: $ ( i_{GT} - i_{US} ) $
+		
+		\item $X_4$ es el diferencial de la inflación esperada de largo plazo $ ( \pi_{GT} - \pi_{US} ) $
+		
+	\end{itemize}
+\end{frame}
+
+\subsection{Redes neuronales}
+% Acá va qué son las redes neuronales y como se estiman, y la especificación final
+
+\begin{frame}{Metodología}{Modelos de redes neuronales artificiales}
+	\figura{0.6}{figuras/neuralNetwork.pdf}
+	
+	\begin{equation}
+	\hat{Y} = f \bigg ( w_0 + \sum_{j=1}^{J} \phi \big ( w_{0j} + \mathbf{w_j}^T \mathbf{x} \big )\bigg )
+	\label{ann_model}
+	\end{equation}
+\end{frame}
+
+\begin{frame}{Metodología}{Gradiente en descenso}
+	\figura{1}{figuras/BackPropAlg.png}
+\end{frame}
+
+
+\begin{frame}{Metodología}{Especificación del modelo de RNAs}
+	La especificación exacta del modelo utilizado es la siguiente:
+	
+	\begin{equation}
+	s_t = f(X_{1t}, X_{2t}, X_{3t}, X_{4t}) + \epsilon_t
+	\label{annModel}
+	\end{equation}
+	
+	donde $f$ representa la aproximación de la red neuronal a los datos.\\
+	
+\end{frame}
+
+\begin{frame}{Metodología}{Arquitectura de RNA}
+	\figura{0.7}{figuras/spec_ann.pdf}
+\end{frame}
+
+
+%--------------------------------------------------------
+%	RESULTADOS
+%--------------------------------------------------------
+\section{Resultados}
+
+\subsection{Caminata aleatoria}
+
+\begin{frame}{Resultados}{Caminata aleatoria fuera de la muestra}
+	\figura{\anchoGraficas}{figuras/RW_out.png}
+\end{frame}
+
+
+\subsection{Modelo lineal}
+
+\begin{frame}{Resultados}{Modelo lineal dentro de la muestra}
+	\figura{\anchoGraficas}{figuras/lin_in.png}
+\end{frame}
+
+
+\begin{frame}{Resultados}{Modelo lineal fuera de la muestra}
+	\figura{\anchoGraficas}{figuras/lin_out.png}
+\end{frame}
+
+\subsection{Redes neuronales}
+
+\begin{frame}{Resultados}{Modelo de redes neuronales dentro de la muestra}
+	\figura{\anchoGraficas}{figuras/ann19_in.png}
+\end{frame}
+
+\begin{frame}{Resultados}{Modelo de redes neuronales fuera de la muestra}
+	\figura{\anchoGraficas}{figuras/ann19_out.png}
+\end{frame}
+
+\subsection{Resumen de resultados}
+
+\begin{frame}{Resultados}{Resumen de resultados}
+	\input{tablas/resumenOutOfSample.tex}
+\end{frame}
+
+\begin{frame}{Resultados}{Relación de error entre modelos}
+	\input{tablas/ratioError.tex}
+\end{frame}
+
+\begin{frame}{Resultados}{Importancia relativa entre variables}
+	\figura{0.65}{figuras/garson_19.pdf}
+\end{frame}
+
+\begin{frame}{Metodología}{Diagrama de identificación neuronal de RNA}
+\figura{1}{figuras/plotnet_19.pdf}
+\end{frame}
+
+\begin{frame}{Resultados}{Prueba de Diebold y Mariano}
+	{\scriptsize
+	\input{tablas/dmtest.tex}}
+\end{frame}
+
+
+%--------------------------------------------------------
+%	CONCLUSIONES
+%--------------------------------------------------------
+\section{Conclusiones}
+
+\begin{frame}{Observaciones finales}
+	\begin{itemize}
+		\item Redes neuronales artificiales como método de estimación para modelos econométricos.
+		
+		\item Pronóstico del tipo de cambio en Guatemala, corto y mediano plazo.
+		
+		\item Importancia de las variables: oferta relativa de dinero y tasas de interés.
+	\end{itemize}
+\end{frame}
+
+%--------------------------------------------------------
+%	DIAPOSITIVA FINAL Y FIN DEL DOCUMENTO
+%--------------------------------------------------------
+\begin{comment}
+\begin{frame}{¡Gracias por su atención!}{Sección de dudas}
+\figura{0.5}{figuras/philosoraptor.jpg}
+\end{frame}
+\end{comment}
+
+\diapositivatexto{Sección de dudas y comentarios}{¡Gracias por su atención!}
+
+
+\end{document} 

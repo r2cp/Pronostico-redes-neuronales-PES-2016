@@ -1,0 +1,36 @@
+\section*{Anexos}
+\addcontentsline{toc}{section}{Anexos}
+
+\subsection*{Prueba de Diebold-Mariano: precisión predictiva entre pronósticos}
+
+\textcite{diebold1995comparing} desarrollaron una prueba para comparar la precisión de pronóstico entre dos modelos. Utilizando una función de pérdida $g(\cdot)$ sobre el error de pronóstico fuera de la muestra $e_{it} = \hat{y}_{it} - y_{t}$, donde $i$ representa el número de modelo ($i = 1,2$), $\hat{y}_{it}$ representa el pronóstico del modelo $i$ en la observación $t$ fuera de la muestra, y $y_{t}$ el valor observado. Finalmente, se define la pérdida diferencial entre los modelos como \[ d_t = g(e_{1t}) - g(e_{2t}) \] 
+
+La idea principal de la prueba consiste en probar que los dos modelos tienen la misma pérdida de predicción, por lo tanto se quiere probar la hipótesis nula de que las pérdidas de predicción son las mismas. En otras palabras, se quiere probar que $ H_0 = E(d_t) = 0 \quad \forall t $. Finalmente, en el trabajo se utiliza un programa de \textit{R} para computar los resultados de la prueba de Diebold y Mariano sobre los modelos de pronóstico presentados anteriormente.\\
+
+En la tabla \ref{tab:dmtest} se comparan los modelos de pronóstico utilizados en el trabajo, y se realiza una prueba Diebold-Mariano de \textit{Modelo 1} contra \textit{Modelo 2}, en la cual la hipótesis nula es que ambos modelos tienen la misma precisión de pronóstico, y la hipótesis alternativa es que el \textit{Modelo 2} tiene menor precisión de pronóstico. La prueba se realiza con utilizando valores de horizonte de pronóstico de hasta 10 meses, y en las columnas se muestra los modelos que se utilizaron para la prueba, y el valor p de la prueba.\\
+
+Como se puede observar en la segunda y cuarta columna, el modelo de redes neuronales artificiales con 9 neuronas es siempre más preciso en pronóstico que el modelo de caminata aleatoria. Asimismo, de acuerdo a la tercera y quinta columna, entre el modelo de caminata aleatoria y el modelo lineal la prueba es rechazada a cualquier nivel de significancia aceptable, por lo que estos tienen diferentes niveles de precisión. Finalmente, observando la sexta columna se puede determinar que el modelo de RNAs con 9 neuronas es posee mayor precisión de pronóstico que el modelo lineal.
+
+\input{tablas/dmtest}
+
+\newpage
+\subsection*{Código de \textit{R} para prueba de Diebold y Mariano}
+
+En el código \ref{lst:dmtest} se muestra el programa de \textit{R} utilizado para realizar la prueba de Diebold y Mariano descrita en la sección anterior.
+
+\renewcommand{\baselinestretch}{1}
+\lstinputlisting[
+	caption={Cómputo de prueba Diebold y Mariano en \textit{R}}, 
+	firstline=8, 
+	lastline=31,
+	label={lst:dmtest}]{listings/dmtest.r}
+\renewcommand{\baselinestretch}{1.5}
+
+
+\newpage
+\subsection*{Código de \textit{R} para entrenamiento de red neuronal artificial}
+En el código \ref{lst:entann} se muestra el programa de \textit{R} utilizado para el entrenamiento y pronóstico utilizando una red neuronal artificial con el paquete \textit{neuralnet}.
+
+\renewcommand{\baselinestretch}{1}
+\lstinputlisting[caption={Programa para entrenamiento de la red neuronal},label={lst:entann}]{listings/ann_pronostico.r}
+\renewcommand{\baselinestretch}{1.5}

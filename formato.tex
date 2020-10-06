@@ -1,0 +1,78 @@
+% Configuración de formato para tesina BANGUAT 2016
+
+% Márgenes
+\usepackage{geometry}
+\geometry{letterpaper, margin=1in, left=3cm}
+
+% Numeración a los ambientes \paragraph y profundidad del índice
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+
+% Formato de las secciones y subsecciones
+%\usepackage{titlesec}
+%\titleformat*{\section}{\large\bfseries}
+%\titleformat*{\subsection}{\normalsize\bfseries}
+%\titleformat{\section}{\normalfont\scshape}{\thesection}{1em}{}
+%\titleformat{\section}[block]{\large\bfseries}{\thesection.}{0.5cm}{}
+
+% Letra arial
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Indentado
+\setlength\parindent{1cm}
+
+% Interlineado 1.5
+\renewcommand{\baselinestretch}{1.5}
+
+% Fuente para la mate
+\usepackage[osf,sc]{mathpazo}
+\usepackage{eulervm}
+
+% Fuente para las gráficas y tablas
+\usepackage{caption}
+\captionsetup{
+	labelfont=bf,
+	textfont={normalsize},
+	justification=centering}
+
+% Líneas para las tablas
+\usepackage{multirow}
+\usepackage{booktabs}
+% Para poner el largo de la tabla
+\usepackage{tabularx}
+
+% Configuración de listings
+\input{listings/R_style}
+\lstset{style=customR, frame=none}
+
+
+% Para la bibliografía
+%\setlength\bibitemsep{1.5\itemsep}
+\setlength\bibitemsep{\baselineskip}
+
+% Doble enter después de párrafos
+%\nonfrenchspacing
+
+% Para evitar que deje secciones al final de la página
+\begin{comment}
+\usepackage{etex}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@afterheading}%
+{\clubpenalty \@M}{\clubpenalties 3 \@M \@M 0}{}{}
+\patchcmd{\@afterheading}%
+{\clubpenalty \@clubpenalty}{\clubpenalties 2 \@clubpenalty 0}{}{}
+\makeatother
+
+% Otra posible solución con needspace:
+
+\usepackage{titlesec}
+\usepackage{needspace}
+...
+\titleformat{\section}
+{\needspace{1in}\Large\bfseries}{\thesection}{1em}{}
+
+\end{comment}
+
+

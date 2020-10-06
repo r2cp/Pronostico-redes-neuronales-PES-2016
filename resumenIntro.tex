@@ -1,0 +1,38 @@
+\section*{Resumen}
+\addcontentsline{toc}{section}{Resumen}
+El tipo de cambio es una de las variables macroeconómicas más importantes debido a que tiene influencia en las decisiones tomadas por los participantes del mercado de divisas como lo son los inversores, importadores, exportadores, banqueros e instituciones financieras, turistas y hacedores de política. Es por esto que un pronóstico adecuado del tipo de cambio resulta una herramienta invaluable para dichos agentes económicos.\\
+
+De acuerdo con la literatura, el pronóstico del tipo de cambio a través de modelos que utilizan fundamentos macroeconómicos está desestimado desde el trabajo seminal presentado por \textcite{meese1983empirical}, en el cual ningún modelo de pronósticos logra superar a un modelo de caminata aleatoria. Desde entonces, han sido muchas las técnicas y modelos utilizados para intentar mostrar que los fundamentos macroeconómicos pueden determinar el tipo de cambio.\\
+
+Entre estas técnicas se han utilizado variantes no lineales, como las redes neuronales artificiales, que han tenido un reciente auge en la resolución de problemas de distintas displinas. En este trabajo se pretende responder a la interrogante ¿Es posible pronosticar el tipo de cambio utilizando una red neuronal que incorpore fundamentos macroeconómicos? En tal sentido, se tiene como objetivo determinar la efectividad de un modelo pronóstico del tipo de cambio para Guatemala utilizando redes neuronales que incorporen agregados macroeconómicos, y comparar los resultados con un modelo de caminata aleatoria y un modelo lineal con los mismos fundamentos.\\
+
+Finalmente, derivado del trabajo de investigación se determina que para Guatemala los modelos que utilizan fundamentos macroeconómicos pronostican mejor el tipo de cambio, y que en general, el modelo de redes neuronales provee mejores medidas de pronóstico que el modelo lineal y el modelo de caminata aleatoria.
+% afirmando que es posible la predicción del tipo de cambio a través de fundamentos macroeconómicos.
+
+\newpage
+\section*{Introducción}
+\addcontentsline{toc}{section}{Introducción}
+
+El tipo de cambio, que es el precio de una moneda extranjera expresado en la moneda local, afecta el comportamiento de los agentes económicos que intervienen en el mercado de divisas y tiene repercusiones en la economía en general. En la actualidad, debido al alto grado de globalización y la apertura económica de los países, el tipo de cambio juega un rol crucial en el movimiento de capital extranjero y en el comercio internacional.\\
+
+Desde la caída del sistema Bretton Woods (que imponía un tipo de cambio fijo) a inicios de los años setenta, la predicción del tipo de cambio se ha vuelto más relevante ya que tiene importancia en aspectos prácticos, porque permite a inversores, bancos centrales e instituciones financieras decidir la asignación de activos, manejar el riesgo y formular políticas. Además, la significancia teórica del pronóstico del tipo de cambio tiene implicaciones vitales en la hipótesis de mercados eficientes, así como el desarrollo de modelos teóricos en finanzas internacionales.\\
+
+Para modelar el comportamiento del tipo de cambio se han utilizado a lo largo del tiempo distintos modelos que emplean variables macroeconómicas para explicar la tendencia y volatilidad en el tipo de cambio. Entre estos se encuentran dos clases generales de modelos, el monetario y el de cartera de balance. Ambos utilizan supuestos como la paridad de poder adquisitivo, y la paridad de los tipos de interés para explicar los movimientos en el tipo de cambio.\\
+
+En la literatura, los modelos estructurales (con fundamentos macroeconómicos) de pronóstico del tipo de cambio se vieron frustrados cuando \textcite{meese1983empirical} presentan un trabajo contundente sobre los el tipo de cambio, en el cual encuentran que un modelo de caminata aleatoria simple podía pronosticar mejor el tipo de cambio que una serie de modelos estructurales. Desde entonces los investigadores han desarrollado todo tipo de modelos teóricos y empleado técnicas de pronóstico poderosas para tener un mejor entendimiento acerca del movimiento de los tipos de cambio y para intentar vencer al modelo de caminata aleatoria. Además, el modelo monetario plantea una relación lineal en los determinantes del tipo de cambio, e ignora componentes no lineales que pueden darse en las observaciones reales, y debido a esto, se han utilizado métodos que capturen las componentes no lineales observados en los datos.\\
+
+Entre los distintos trabajos de pronóstico del tipo de cambio, \textcite{sunythesis} utiliza un modelo monetario con variables como el ingreso real relativo entre dos países, la oferta monetaria relativa, el diferencial de tasas de interés y el diferencial de inflación para entrenar una red neuronal artificial y pronosticar exitosamente el tipo de cambio a través de los fundamentos macroeconómicos.\\
+
+Una red neuronal es un método general de captura de las componentes no lineales entre variables, inspirado en la forma en que está compuesto el sistema nervioso humano, empleando neuronas interconectadas para aprender el patrón de comportamiento entre las variables de entrada y proveer un estímulo de salida, que puede ser utilizado en problemas de clasificación y regresión de variables.\\
+
+Debido a los problemas de pronóstico que se han presentado en los trabajos de tipo de cambio a lo largo de la historia, y dado el reciente auge de la utilización de redes neuronales en la resolución de problemas en distintas disciplinas, se justifica la utilización de un modelo de regresión empleando redes neuronales y variables que de acuerdo a los modelos teóricos determinen el tipo de cambio para evaluar la eficacia de un pronóstico empleando esta técnica.\\
+
+En el presente trabajo se emplea una metodología cercana a la presentada por \textcite{sunythesis}, en la cual se replica un modelo de caminata aleatoria utilizando la serie del tipo de cambio del quetzal contra el dólar estadounidense para pronosticar el tipo de cambio y evaluar este pronóstico contra uno dado por modelos estructurales, específicamente del modelo monetario, empleando el modelo lineal convencional y empleando la técnica de redes neuronales artificiales.\\
+
+En el primer capítulo se describen los fundamentos teóricos del tipo de cambio y los modelos teóricos que se han empleado en la explicación de movimientos en el tipo de cambio, así como los supuestos de los que parten dichos modelos.\\
+
+En el segundo capítulo se describe con mayor precisión la metodología empleada para el ajuste de los modelos monetarios, así como una breve descripción de los aspectos técnicos relacionados con el entrenamiento de la red neuronal, y las medidas de evaluación de pronósticos que se utilizarán para comparar dichos los modelos.\\
+
+En el tercer capítulo se describen los pronósticos obtenidos utlizando los distintos modelos y se interpretan los resultados de acuerdo con la teoría económica.\\
+
+Finalmente en el cuarto capítulo se hacen observaciones sobre los hallazgos clave obtenidos en la investigación.

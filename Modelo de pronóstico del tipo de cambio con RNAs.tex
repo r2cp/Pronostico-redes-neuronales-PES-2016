@@ -1,0 +1,68 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+
+% Paquetes básicos
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{hyperref}
+\hypersetup{pdftex,colorlinks=true,allcolors=black}
+
+% Referencias
+\usepackage[backend=biber, bibstyle=authoryear, citestyle=authoryear]{biblatex}
+\addbibresource{referencias.bib}
+
+% Configuraciones de formato
+\input{formato}
+
+\begin{document}
+	
+	% Carátula del documento
+	\include{caratula}
+
+%\begin{comment}
+	
+	% Índice de contenidos, figuras y tablas
+	\pagenumbering{Roman}
+	\setcounter{page}{1}
+	\input{indice}
+	
+	% Cuerpo del documento
+	\pagenumbering{arabic}
+	\setcounter{page}{1}
+	
+	% Resumen e introducción
+	\include{resumenIntro}
+	
+	% Marco teórico
+	% [y] Mencionar de que el tipo de cambio más importante para Guatemala es el dólar.
+	% [y] Revisar comentarios de Rosa.
+	\include{marcoTeorico}
+	
+	% Metodología
+	% [y] Revisar cuando se mencione "fuera de la muestra" o "dentro de la muestra" para explicar a qué se refiere.
+	% [y] Quitar lo de 2 capas ocultas en la red neuronal y justificar que solo 1 capa oculta es suficiente para aproximar cualquier función continua hasta un cierto grado de precisión.
+	% [y] Poner que el propósito del trabajo es replicar en cierta medida los resultados propuestos por Sun
+	% Aclarar que no se adentrará en el tema de overfitting de las redes neuronales
+	% [y] Poner el RMSPE
+	\include{metodologia}
+	
+	% Análisis de resultados
+	\include{resultados}
+	
+	% Observaciones finales
+	\include{conclusiones}
+	
+	% Bibliografía
+	%\nocite{*}
+	\printbibliography[heading=bibintoc]
+	
+	% Anexos
+	\include{anexos}
+	
+%\end{comment}	
+
+	
+\end{document}
